@@ -31,11 +31,11 @@ Route::get('/calendar', function () {
 // カレンダーのイベント
 Route::controller(EventController::class)->group(function () {
     Route::get('/events','index')->name('event.index');
-    Route::get('/create', 'create')->name('event.create');
-    Route::post('/store', 'store')->name('event.store');
+    Route::get('/calendar/create', 'create')->name('event.create');
+    Route::post('/calendar/store', 'store')->name('event.store');
+    Route::get('/calendar/{id}/edit', 'edit')->name('event.edit');
+    Route::put('/calendar/update', 'update')->name('event.update');
     Route::get('/home', 'home')->name('event.home');
 });
-
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
