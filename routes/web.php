@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/', function () {
+//     return view('/calendar');
+// });
+
 Route::get('/calendar', function () {
-    return view('calendar');
+    return view('calendars.calendar');
 });
 
-Route::get('/events', [\App\Http\Controllers\EventController::class, 'index']);
+// カレンダーのイベント
+Route::controller(EventController::class)->group(function () {
+    Route::get('/events','index')->name('event.index');
+    Route::get('/create', 'create')->name('event.create');
+    Route::post('/store', 'store')->name('event.store');
+    Route::get('/home', 'home')->name('event.home');
+});
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

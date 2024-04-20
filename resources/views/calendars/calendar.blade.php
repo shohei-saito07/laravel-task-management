@@ -17,11 +17,9 @@
             initialView: 'dayGridMonth',
             selectable: true, // 日付選択を可能にする
             select: function(info) {
-                // ユーザーが日付を選択したときのロジックをここに追加する
                 debugger;
-                var startDate = info.startStr;
-                var endDate = info.endStr;
-                // ここで予定を追加する処理を実行するか、予定追加用のモーダルを表示するなどの処理を行う
+                let url = "{{ route('event.create') }}";
+                window.location.href = url;
             },
             events: 'events' // イベントデータを取得するエンドポイント
         });
