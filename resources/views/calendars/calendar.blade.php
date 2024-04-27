@@ -14,30 +14,21 @@
         document.addEventListener('DOMContentLoaded', function () 
         {
             var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, 
-            {
-                initialView: 'dayGridMonth',
-                locale: 'ja', // カレンダーに表示する文字の言語選択
-                selectable: true, // 日付選択を可能にする
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // 土日の設定
+                events: 'events', // タスクを取得
+                selectable: true, // カレンダー選択可否
+                // タスクの作成
                 select: function(info) {
                     let url = "{{ route('event.create') }}";
                     window.location.href = url;
                 },
-                // タスクの編集をする
+                // タスクの編集
                 eventClick: function(info) {
-                    alert('Event: ' + info.event.title);
-                    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                    alert('View: ' + info.view.type);
-
-                    // change the border color just for fun
-                    info.el.style.borderColor = 'red';
-                    debugger;
-                    // 予定編集画面へ遷移
                     let eventId = info.event.id;
                     let url = "{{ route('event.edit', ':id') }}".replace(':id', eventId);
                     window.location.href = url;
                 },
-                events: 'events' // イベントデータを取得するエンドポイント
             });
             calendar.render();
         });

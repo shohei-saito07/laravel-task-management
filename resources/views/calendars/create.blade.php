@@ -8,20 +8,21 @@
      <div class="container">
      <h1>予定</h1>
 
+     <!-- エラーがある場合にエラー内容を表示 -->
+     <ul>
+     @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+     @endforeach
+     </ul>
+     
      <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
-          @error('title')
-               <strong>タイトルを入力してください</strong>
-          @enderror
           <div class="form-group">
                <label for="store-title">タイトル</label>
                <div>
                     <input type="text" name="title" id="store-title" value="{{ old('title') }}" class="form-control">
                </div>
           </div>
-          @error('start_date_time')
-               <strong>開始日を入力してください</strong>
-          @enderror
           <div class="form-group">
                <label for="store-start_date_time">開始日</label>
                <div class="col-sm-10">

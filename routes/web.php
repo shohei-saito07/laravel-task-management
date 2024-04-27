@@ -17,25 +17,22 @@ use App\Http\Controllers\EventController;
 Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get('/', function () {
-//     return view('/calendar');
-// });
-
-Route::get('/calendar', function () {
     return view('calendars.calendar');
 });
 
+Route::get('/calendar', function () {
+    return view('calendars.calendar');
+})->name('calendar.home');
+
 // カレンダーのイベント
 Route::controller(EventController::class)->group(function () {
-    Route::get('/events','index')->name('event.index');
+    Route::get('events','index')->name('event.index');
     Route::get('/calendar/create', 'create')->name('event.create');
     Route::post('/calendar/store', 'store')->name('event.store');
-    Route::get('/calendar/{id}/edit', 'edit')->name('event.edit');
-    Route::put('/calendar/update', 'update')->name('event.update');
+    Route::get('/calendar/edit/{calendar}', 'edit')->name('event.edit');
+    Route::put('/calendar/update/{calendar}', 'update')->name('event.update');
+    Route::delete('/calendar/delete/{calendar}', 'destroy')->name('event.destroy');
     Route::get('/home', 'home')->name('event.home');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

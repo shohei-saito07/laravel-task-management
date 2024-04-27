@@ -120,6 +120,9 @@ return [
         ],
     ],
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'タイトル',
+        'start_date_time' => '開始日'
+    ],
 
 ];
